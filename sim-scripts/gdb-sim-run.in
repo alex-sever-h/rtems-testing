@@ -273,6 +273,11 @@ get_tname()
   echo `basename $tfile ${ext}`
 }
 
+gdbServerARGS()
+{
+  echo " -s "
+}
+
 runtest()
 {
   testname=${1}
@@ -397,8 +402,8 @@ do
   fi
 
   if [ ${bspSupportsGDBServerMode} = "yes" -a ${gdb_server_mode} = "yes" ];then
-    test ${verbose} == 'yes' && echo ${runBSP} `runARGS ${toRun}`
-    ${runBSP} `gdbServerARGS ${toRun}` <${bspInputDevice}
+    test ${verbose} == 'yes' && echo ${runBSP} `runARGS ${toRun}` `gdbServerARGS`
+    ${runBSP} `runARGS ${toRun}` `gdbServerARGS` #<${bspInputDevice}
     exit 0
   fi
 
